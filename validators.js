@@ -44,17 +44,14 @@ function jsonMaxDepth(obj, d = 0) {
 
 function validateYAML(code) {
   const trimmed = code.trim();
-  // Reject bare JSON objects/arrays — valid JSON is valid YAML but misleading
-  if ((trimmed.startsWith('{') && trimmed.endsWith('}')) ||
-      (trimmed.startsWith('[') && trimmed.endsWith(']'))) {
-    try {
-      JSON.parse(trimmed);
-      return {
-        valid: false,
-        issues: [{ line: 1, description: 'Input looks like JSON, not YAML. Switch the language selector to JSON.' }],
-      };
-    } catch (_) { /* not JSON, continue */ }
-  }
+  // Reject any input that parses as valid JSON — valid JSON is valid YAML but misleading
+  try {
+    JSON.parse(trimmed);
+    return {
+      valid: false,
+      issues: [{ line: 1, description: 'Input looks like JSON, not YAML. Switch the language selector to JSON.' }],
+    };
+  } catch (_) { /* not JSON, continue */ }
 
   if (typeof jsyaml === 'undefined') {
     return { valid: false, issues: [{ line: null, description: 'YAML parser not loaded. Check your internet connection.' }] };
