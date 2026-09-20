@@ -49,7 +49,7 @@ open src/index.html
 ### Run tests
 
 ```bash
-npm install          # installs js-yaml and @xmldom/xmldom for Node test env
+npm ci --ignore-scripts  # installs locked test dependencies
 npm test
 ```
 
@@ -66,7 +66,7 @@ Expected output:
   ...
 
 ══════════════════════════════════════════════════════
-  Results: 42 passed, 0 failed
+  Results: 47 passed, 0 failed
 ══════════════════════════════════════════════════════
 ```
 
@@ -94,7 +94,7 @@ vercel
 | Format | Parser | Notes |
 |--------|--------|-------|
 | JSON   | Native `JSON.parse` | Extracts line from error position offset |
-| YAML   | `js-yaml` (CDN) | Rejects bare JSON objects to prevent false positives |
+| YAML   | Vendored `js-yaml` | Rejects bare JSON objects to prevent false positives |
 | TOML   | Custom regex parser | Checks key types, duplicate keys/sections, unclosed strings |
 | XML    | Native `DOMParser` | Full browser XML parser; reports element and attribute counts |
 | INI    | Custom line parser | Supports `=` and `:` separators; detects duplicate keys |
@@ -130,3 +130,7 @@ This separation means validators can be tested independently from the UI, and th
 ## License
 
 MIT
+
+## Development and review
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for local checks, configuration handling, and the review workflow.
