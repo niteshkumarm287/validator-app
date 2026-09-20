@@ -7,7 +7,7 @@
     "test:install": "npm install js-yaml @xmldom/xmldom && npm test"
   },
   "devDependencies": {
-    "@xmldom/xmldom": "^0.8.11",
+    "@xmldom/xmldom": "^0.9.12",
     "js-yaml": "^4.1.1"
   },
   "keywords": [
